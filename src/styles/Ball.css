@@ -1,0 +1,8 @@
+.balls{
+    width:26px; 
+    height:26px; 
+    border-radius:50%;
+    opacity: 80%;
+    margin: 8px;
+    animation: appear 1s ease-in-out 1s;
+}
