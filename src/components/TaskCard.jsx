@@ -1,5 +1,22 @@
+import { useDispatch, useSelector } from "react-redux"
+import { removeTask } from "../slices/taskSlice"
+import { useState } from "react"
+
 const TaskCard = ({task})=>{
     
+    const dispatch = useDispatch()
+    const [isChecked, setisChecked] = useState((task.status==='pending'?false:true))
+
+    const handleDelete = ()=>{
+        dispatch(removeTask(task.id))
+    }
+
+    console.log(isChecked)
+    const handleStatus = () => {
+
+    };
+      
+
     return(
         <>
             <div className="h-52 rounded-2xl border-2 p-3 border-black" style={{ backgroundColor: task.bgColor }} >
@@ -7,8 +24,12 @@ const TaskCard = ({task})=>{
                 <div className="h-32 overflow-clip">
                     <span className="block text-lg font-light break-words text-ellipsis">{task.description}</span>                
                 </div>
-                <span className="font-light text-sm mr-2">{task.priority.toUpperCase()}</span>
-                <span className="font-light text-sm">{task.date}</span>
+                <div className="mt-auto flex justify-between items-center">
+                    <input type="checkbox" className="w-4 h-4" onChange={handleStatus}/>
+                    <span className="font-light text-xs">{task.priority.toUpperCase()}</span>
+                    <span className="font-light text-xs">{task.date}</span>                
+                    <button className="bg-red-700 w-4 h-4 border-black border-2 flex items-center justify-center text-sm" onClick={handleDelete}>X</button>
+                </div>
             </div>
         </>
     )
