@@ -20,14 +20,17 @@ const DisplayTask = () => {
         return true;
       })
       .sort((a, b) => {
-        return sortData.date === "asc"
-          ? new Date(a.date) - new Date(b.date)
-          : new Date(b.date) - new Date(a.date);
-      })
-      .sort((a, b) => {
-        return sortData.priority === "asc"
-          ? priorityOrder[a.priority] - priorityOrder[b.priority]
-          : priorityOrder[b.priority] - priorityOrder[a.priority];
+        const dateWeight =
+          sortData.date === "asc"
+            ? new Date(a.date) - new Date(b.date)
+            : new Date(b.date) - new Date(a.date);
+  
+        const priorityWeight =
+          sortData.priority === "asc"
+            ? priorityOrder[a.priority] - priorityOrder[b.priority]
+            : priorityOrder[b.priority] - priorityOrder[a.priority];
+  
+        return dateWeight + priorityWeight;
       });
   };
 
